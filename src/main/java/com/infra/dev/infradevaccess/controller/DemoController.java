@@ -75,5 +75,29 @@ public class DemoController {
            return list;
     }
 
+    @RequestMapping(method= RequestMethod.GET,value="/getH2EmpDetails",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "gets response",notes = "retrieve response for a user query",response = String.class)
+    @ApiResponses({
+        @ApiResponse(code=200,message = "successfully retrieved the response from controller")
+    })
+    public List<EmployeeDTO> getH2EmpDetails() throws GenericException{
+        logger.info("inside DemoController-getDemoGeneric");      
+           List<EmployeeDTO> list = demoservice.getH2EmpDetails();
+           System.out.println("List Size****** "+list.size());
+           return list;
+    }
+
+    @RequestMapping(method= RequestMethod.GET,value="/getPostgresEmpDetails",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "gets response",notes = "retrieve response for a user query",response = String.class)
+    @ApiResponses({
+        @ApiResponse(code=200,message = "successfully retrieved the response from controller")
+    })
+    public List<EmployeeDTO> getPostgresEmpDetails() throws GenericException{
+        logger.info("inside DemoController-getDemoGeneric");      
+           List<EmployeeDTO> list = demoservice.getPostgresEmpDetails();
+           System.out.println("List Size****** "+list.size());
+           return list;
+    }
+
     
 }

@@ -7,8 +7,10 @@ import com.infra.dev.infradevaccess.common.AppModelMapper;
 import com.infra.dev.infradevaccess.entity.Employee;
 import com.infra.dev.infradevaccess.exception.GenericException;
 import com.infra.dev.infradevaccess.exception.ResourceNotFoundException;
+import com.infra.dev.infradevaccess.h2.repository.H2Repository;
 import com.infra.dev.infradevaccess.model.EmployeeDTO;
 import com.infra.dev.infradevaccess.model.MessageType;
+import com.infra.dev.infradevaccess.postgres.repository.PostgresRepository;
 import com.infra.dev.infradevaccess.repository.EmployeeRepository;
 import com.infra.dev.infradevaccess.service.DemoService;
 
@@ -25,6 +27,12 @@ public class DemoServiceImpl implements DemoService {
 
     @Autowired
     AppModelMapper appModelMapper;
+
+    @Autowired
+    PostgresRepository postgresRepository;
+    
+    @Autowired
+    H2Repository h1Repository;
 
     @Override
     public String getDemoServiceResourceNotFound() throws ResourceNotFoundException {        
@@ -44,6 +52,54 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public List<EmployeeDTO> getEmpDetails() {
+    
+        List<EmployeeDTO> empDTOList = new ArrayList<EmployeeDTO>();
+
+        //Employee emp = new Employee();
+
+
+        List<Employee> empList = empRepository.findAll();
+
+        if(!CollectionUtils.isEmpty(empList)){
+
+            empList.forEach(row ->{
+
+                EmployeeDTO empDTO=appModelMapper.convertToEmployeeDTO(row);
+                empDTOList.add(empDTO);
+
+            });
+        }
+
+
+        return empDTOList;
+    }
+
+    @Override
+    public List<EmployeeDTO> getH2EmpDetails() {
+    
+        List<EmployeeDTO> empDTOList = new ArrayList<EmployeeDTO>();
+
+        //Employee emp = new Employee();
+
+
+        List<Employee> empList = empRepository.findAll();
+
+        if(!CollectionUtils.isEmpty(empList)){
+
+            empList.forEach(row ->{
+
+                EmployeeDTO empDTO=appModelMapper.convertToEmployeeDTO(row);
+                empDTOList.add(empDTO);
+
+            });
+        }
+
+
+        return empDTOList;
+    }
+
+    @Override
+    public List<EmployeeDTO> getPostgresEmpDetails() {
     
         List<EmployeeDTO> empDTOList = new ArrayList<EmployeeDTO>();
 

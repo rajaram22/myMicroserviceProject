@@ -13,5 +13,9 @@ public interface DemoService {
     String getDemoServiceSuccess();
 
     List <EmployeeDTO> getEmpDetails();
+
+    List<EmployeeDTO> getH2EmpDetails();
+
+    List<EmployeeDTO> getPostgresEmpDetails();
     
 }
